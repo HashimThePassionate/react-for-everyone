@@ -207,3 +207,207 @@ React removes this complexity by:
 * Making large UIs easier to maintain 🔧
 
 ---
+
+# ⚛️ **React and Declarative Code**
+
+## 🔄 Revisiting the Example
+
+Earlier, we saw how **Vanilla JavaScript** updates a paragraph after a button click.
+Now, let’s see how the **same task** is done in **React**.
+
+---
+
+## 👨‍💻 React Code Snippet
+
+```jsx
+import { useState } from 'react';
+
+function App() {
+  const [outputText, setOutputText] = useState('Initial text');
+
+  function updateTextHandler() {
+    setOutputText('Text was changed!');
+  }
+
+  return (
+    <>
+      <button onClick={updateTextHandler}>
+        Click to change text
+      </button>
+      <p>{outputText}</p>
+    </>
+  );
+}
+```
+
+---
+
+## 📝 Step-by-Step Explanation
+
+### 1. Import React Hook
+
+```jsx
+import { useState } from 'react';
+```
+
+* We import **useState** (a React hook).
+* Hooks let us add features (like state) to our component.
+* `useState` gives us:
+
+  * A **state variable** (data that React watches).
+  * A **function** to update that variable.
+
+---
+
+### 2. Define the Component
+
+```jsx
+function App() {
+```
+
+* `App` is a **React component**.
+* Components are reusable building blocks of UI.
+* Each component returns **JSX** (a mixture of HTML + JS).
+
+---
+
+### 3. Create State
+
+```jsx
+const [outputText, setOutputText] = useState('Initial text');
+```
+
+* `outputText` → variable holding the current text.
+* `setOutputText` → function to change that text.
+* `'Initial text'` → default (initial) value.
+
+📌 *Whenever `setOutputText` changes the value, React automatically updates the UI.*
+
+---
+
+### 4. Define a Function
+
+```jsx
+function updateTextHandler() {
+  setOutputText('Text was changed!');
+}
+```
+
+* A function that updates state when called.
+* `setOutputText('Text was changed!')` → tells React to replace the current text.
+
+📌 Unlike Vanilla JS, we don’t manually find and change the `<p>` element. React handles that automatically.
+
+---
+
+### 5. Return JSX (UI)
+
+```jsx
+return (
+  <>
+    <button onClick={updateTextHandler}>
+      Click to change text
+    </button>
+    <p>{outputText}</p>
+  </>
+);
+```
+
+* The component **returns JSX** (HTML-like syntax inside JS).
+* `<button>`: has `onClick={updateTextHandler}` (React’s version of event listener).
+* `<p>{outputText}</p>`: React outputs the current value of `outputText`.
+
+📌 Whenever `outputText` changes, React **re-renders** and updates this paragraph automatically.
+
+---
+
+## 🏃 Dry Run of the Code
+
+1. Component `App` loads.
+2. React sets up state: `outputText = "Initial text"`.
+3. UI shows:
+
+   ```
+   [Button: Click to change text]
+   Initial text
+   ```
+4. User clicks the button.
+5. `updateTextHandler()` runs → `setOutputText("Text was changed!")`.
+6. React **re-renders** the UI:
+
+   ````
+   [Button: Click to change text]
+   Text was changed!  
+   ````
+
+---
+
+## 🧩 Declarative Approach in Action
+
+* With **Vanilla JS (Imperative)**:
+
+  * You must manually select DOM elements.
+  * Add event listeners.
+  * Update `textContent` step by step.
+
+* With **React (Declarative)**:
+
+  * You only define **what the UI should look like** for each state.
+  * React handles the DOM changes automatically.
+
+---
+
+## 📦 JSX and Pre-Processing
+
+* React uses **JSX** → JavaScript with HTML-like syntax.
+* Browsers don’t understand JSX directly.
+* During the **build step**, tools (like Babel) **transpile** JSX → normal JavaScript.
+* This allows us to write code that’s:
+
+  * Clearer ✅
+  * Closer to HTML ✅
+  * Easier to maintain ✅
+
+---
+
+## 🔑 State in React
+
+* **State** is like a variable that React watches.
+* When state changes → React re-renders that part of the UI.
+* Example:
+
+  * `outputText` starts as `"Initial text"`.
+  * After click → changes to `"Text was changed!"`.
+  * React updates the DOM for you — no manual DOM instructions needed.
+
+---
+
+## 🏗️ Why Declarative > Imperative
+
+* No `document.querySelector()`
+* No `addEventListener()`
+* No `element.textContent = ...`
+
+Instead, you:
+
+1. Define **states**.
+2. Define **UI output** for those states.
+3. React ensures the browser DOM matches your description.
+
+---
+
+## 🧠 First Impression of React
+
+At first glance, React code looks unusual:
+
+* A **mix of JS + HTML (JSX)**.
+* Functions and UI side by side.
+
+But:
+
+* It’s still JavaScript.
+* JSX makes it easy to describe content and structure like HTML.
+* React merges **business logic** + **UI definition** → making it easier to handle complex UIs.
+
+---
+
