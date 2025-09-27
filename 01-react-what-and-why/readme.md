@@ -1,5 +1,68 @@
 # ⚛️ **What is React**?
 
+<details>
+<summary>📋 <strong>Table of Contents</strong></summary>
+
+- [⚛️ **What is React**?](#️-what-is-react)
+  - [🤔 But what does this mean?](#-but-what-does-this-mean)
+  - [📚 What is a “library” and how does React help with building UIs?](#-what-is-a-library-and-how-does-react-help-with-building-uis)
+  - [⚛️ React as such a library](#️-react-as-such-a-library)
+- [📜 **The Problem with Vanilla JavaScript**](#-the-problem-with-vanilla-javascript)
+  - [🌐 What is Vanilla JavaScript?](#-what-is-vanilla-javascript)
+  - [⚖️ Pros and Cons](#️-pros-and-cons)
+  - [🏗️ React vs Vanilla JavaScript](#️-react-vs-vanilla-javascript)
+  - [🧩 Vanilla JavaScript Example](#-vanilla-javascript-example)
+    - [👨‍💻 Code Snippet](#-code-snippet)
+  - [🔍 Step-by-Step Explanation of the Code](#-step-by-step-explanation-of-the-code)
+    - [🏃 Dry Run Example](#-dry-run-example)
+  - [📚 Imperative vs Declarative](#-imperative-vs-declarative)
+    - [Imperative (Vanilla JS):](#imperative-vanilla-js)
+    - [Declarative (React):](#declarative-react)
+  - [📊 Real Numbers Example](#-real-numbers-example)
+  - [🚀 Why React?](#-why-react)
+- [⚛️ **React and Declarative Code**](#️-react-and-declarative-code)
+  - [🔄 Revisiting the Example](#-revisiting-the-example)
+  - [👨‍💻 React Code Snippet](#-react-code-snippet)
+  - [📝 Step-by-Step Explanation](#-step-by-step-explanation)
+    - [1. Import React Hook](#1-import-react-hook)
+    - [2. Define the Component](#2-define-the-component)
+    - [3. Create State](#3-create-state)
+    - [4. Define a Function](#4-define-a-function)
+    - [5. Return JSX (UI)](#5-return-jsx-ui)
+  - [🏃 Dry Run of the Code](#-dry-run-of-the-code)
+  - [🧩 Declarative Approach in Action](#-declarative-approach-in-action)
+  - [📦 JSX and Pre-Processing](#-jsx-and-pre-processing)
+  - [🔑 State in React](#-state-in-react)
+  - [🏗️ Why Declarative \> Imperative](#️-why-declarative--imperative)
+  - [🧠 First Impression of React](#-first-impression-of-react)
+- [⚛️ **How React Manipulates the DOM**](#️-how-react-manipulates-the-dom)
+  - [🧩 JSX and Pre-Processing](#-jsx-and-pre-processing-1)
+  - [🌳 React’s Virtual DOM](#-reacts-virtual-dom)
+  - [📦 React’s Core Packages](#-reacts-core-packages)
+  - [🔗 How the Bridge Works](#-how-the-bridge-works)
+  - [📱 Beyond the Browser – React Native](#-beyond-the-browser--react-native)
+- [🚀 **Introducing SPAs** (Single-Page Applications)](#-introducing-spas-single-page-applications)
+  - [🎨 React for Complex UIs](#-react-for-complex-uis)
+  - [🌍 Routing in React](#-routing-in-react)
+  - [📄 What is a SPA?](#-what-is-a-spa)
+  - [🖥️ Full-Stack React Apps](#️-full-stack-react-apps)
+- [⚛️ **Creating a React Project with Vite**](#️-creating-a-react-project-with-vite)
+  - [📌 Why Vite Instead of Next.js?](#-why-vite-instead-of-nextjs)
+  - [🛠️ Prerequisites](#️-prerequisites)
+  - [📂 Create a New React Project with Vite](#-create-a-new-react-project-with-vite)
+    - [Step 1 — Navigate to a Folder](#step-1--navigate-to-a-folder)
+    - [Step 2 — Create Project](#step-2--create-project)
+      - [🔎 Explanation:](#-explanation)
+    - [Step 3 — Install Dependencies](#step-3--install-dependencies)
+    - [Step 4 — Start Development Server](#step-4--start-development-server)
+      - [🔎 What Happens:](#-what-happens)
+  - [📂 Vite Project Structure](#-vite-project-structure)
+  - [📘 Notes on Files](#-notes-on-files)
+
+</details>
+
+<br/>
+
 > **React is a JavaScript library**, and if you take a look at the official web page (the official React website and documentation are available at this link: [https://react.dev/](https://react.dev/)), you learn that the creators call it **“The library for web and native user interfaces.”** ✨
 
 ---
