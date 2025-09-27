@@ -411,3 +411,79 @@ But:
 
 ---
 
+# ⚛️ **How React Manipulates the DOM**
+
+## 🧩 JSX and Pre-Processing
+
+When writing React code, we often mix **JavaScript + HTML-like syntax** using **JSX**.
+
+👉 But browsers can’t understand JSX directly.
+
+* **Pre-processing step** is required before deployment.
+* JSX is **transformed into normal JavaScript code** (using tools like Babel).
+* Even after transformation, the code **still won’t contain raw DOM instructions** like `document.querySelector()` or `element.textContent = ...`.
+
+---
+
+## 🌳 React’s Virtual DOM
+
+Instead of manual DOM manipulation, React internally creates a **virtual DOM**:
+
+* A **tree structure** representing the current state of the UI.
+* This is React’s internal “blueprint” of the real DOM.
+* React uses this virtual DOM to decide **what needs to change** in the actual DOM.
+
+📌 You’ll learn more about this in **Section 10 – Behind the Scenes of React and Optimization Opportunities**.
+
+---
+
+## 📦 React’s Core Packages
+
+React’s functionality is split across **two main packages**:
+
+1. **`react` package**
+
+   * The main React library.
+   * Provides features like JSX support, state, and component logic.
+   * Responsible for creating and managing the **virtual DOM**.
+
+2. **`react-dom` package**
+
+   * Acts as the **bridge** between React and the browser’s **real DOM**.
+   * Takes instructions from React and performs actual DOM operations:
+
+     * Selecting elements
+     * Creating elements
+     * Updating elements
+     * Deleting elements
+
+---
+
+## 🔗 How the Bridge Works
+
+* You write React code → React builds/updates its **virtual DOM**.
+* `react-dom` compares the **virtual DOM** with the **real DOM** (diffing process).
+* Only the **changed parts** are updated in the browser DOM → efficient performance.
+
+⚡ This makes React **faster** than manually writing DOM instructions.
+
+---
+
+## 📱 Beyond the Browser – React Native
+
+React is not limited to browsers.
+
+* In web apps → we use **`react-dom`** as the bridge.
+* In mobile apps → we use **`react-native`** as the bridge.
+
+So:
+
+* `react` (core logic + virtual DOM) stays the same.
+* The “bridge” package changes depending on the target environment.
+
+Examples:
+
+* 🌐 **Web apps** → `react-dom`
+* 📱 **Mobile apps** → `react-native`
+
+---
