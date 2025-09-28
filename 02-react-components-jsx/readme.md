@@ -263,3 +263,52 @@ The `import` and `export` statements are not specific to React; they are **stand
 If the idea of splitting code into separate files using `import` and `export` is new to you, it is highly recommended that you first explore **basic JavaScript resources on Modules**. Understanding this concept is crucial for working with any larger JavaScript project, including React.
 
 🔗 [A great resource to learn the fundamentals is the MDN Web Docs article on Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+
+
+# 🏗️ **Component Foundations and Types**
+
+The previous examples showed simplified components. While they include features like `useState()` that you haven't learned yet, the fundamental concept should be clear: React is built on **standalone building blocks** that can be easily **combined** to create a user interface. 🧱
+
+---
+
+## 🔁 Two Ways to Define Components
+
+When working with React, there are two primary ways you can define a component:
+
+1.  **Class-based components (or "class components")**:
+    * Components defined using the **`class` keyword**.
+2.  **Functional components (or "function components")**:
+    * Components defined using **regular JavaScript functions**.
+
+React requires that components are defined as either a **function** or a **class**. Throughout this book, components will be built as **JavaScript functions**. 💻
+
+### 💡 Note on Component Types
+
+* Until late 2018, developers **had to use class-based components** for tasks involving internal **state** (data that changes).
+* In late 2018, **React Hooks** were introduced. This new concept allows you to perform **all operations and tasks** (including using state) with **functional components**.
+* As a result, while **class-based components are still supported**, they are becoming less common and are generally being phased out in modern React development. Therefore, they will **not be covered** in this resource. 🙅
+
+---
+
+## 🔎 Noteworthy Component Features
+
+Looking closely at the examples, several key characteristics define how components and their code are structured:
+
+1.  **Capitalized Names**:
+    * The main component functions must use **capitalized names** (e.g., `SubmitButton`). This is a convention that helps React distinguish components from regular HTML elements (which use lowercase names, like `<div>`). 🏷️
+
+2.  **Inner Functions**:
+    * Inside the component function, you can define other **"inner" functions** (e.g., `handleSubmit`). These are typically written in **`camelCase`** (starting with a lowercase letter) following standard JavaScript naming conventions.
+
+3.  **HTML-like Return Code (JSX)**:
+    * The component function must **return HTML-like code** (known as **JSX code**). This is how React knows what to render on the screen. 🖼️
+
+4.  **Use of Features (Hooks)**:
+    * Features like **`useState()`** (known as **Hooks**) can be used **inside** the component functions to add special capabilities, like managing state. 🎣
+
+5.  **Exporting Components**:
+    * The component functions must be **exported** (usually via `export default`) so they can be used in other parts of the application. 📤
+
+6.  **Importing Features**:
+    * Certain features (like `useState` from the `react` package) and other custom components (like `SubmitButton`) must be **imported** using the **`import` keyword** before they can be used. 📥
+
