@@ -951,3 +951,75 @@ function App() {
 In JSX, the forward slash at the end of a non-content-containing element is **mandatory**.
 
 ---
+
+# 🔄 **Moving Beyond Static Content**
+
+In the examples covered so far, the content has been **static** (e.g., `<h1>Hello World!</h1>`), meaning it never changes. However, most real-world websites need to output **dynamic content**—content that can change based on user input, data fetching, or other events.
+
+While making content truly dynamic in React requires the **state** concept (covered later), it's important to learn the **JSX syntax** for incorporating JavaScript values now.
+
+-----
+
+## 💻 Outputting Dynamic Content Syntax
+
+The core method for outputting dynamic content within JSX is by using **curly braces** (`{...}`).
+
+### 📋 Code Snippet
+
+```jsx
+function App() {
+  const userName = 'Max';
+  return <p>Hi, my name is {userName}!</p>;
+};
+```
+
+### ✨ Detailed Code Explanation
+
+1.  **`const userName = 'Max';`**: A standard JavaScript constant is defined and given a value.
+2.  **`{userName}`**: Inside the JSX element (`<p>...</p>`), the curly braces are used to embed the JavaScript expression. React evaluates this expression and outputs its resulting **value** as text content in the final DOM.
+
+**Note:** This example technically still produces static output because the `userName` variable never changes within the function call. However, the syntax shown is the same one used later with **state** to create truly dynamic UIs.
+
+## 💡 What Can Go Inside the Curly Braces?
+
+You can place **any valid JavaScript expression** between the curly braces. An expression is code that produces a single value.
+
+| Valid Examples | Description |
+| :--- | :--- |
+| **`{userName}`** | Outputting the value of a **variable** or **constant**. |
+| **`{getMyName()}`** | Calling a **function** that returns a value. |
+| **`{1 + 1}`** | Performing simple **inline calculations**. |
+| **`{Math.random()}`** | Calling built-in JavaScript objects and methods. |
+
+### ❌ What Is NOT Allowed?
+
+You **cannot** add complex **statements** like `for` loops or `if` statements directly inside the curly braces.
+
+  * **Rule:** You must output a (potentially) dynamic value, so **anything that produces a single value is allowed**.
+  * **Error Example:** Trying to output a complex JavaScript **object** in JSX (e.g., `{ {name: 'Max'} }`) will cause an error, as React doesn't know how to render a raw object structure as content.
+
+-----
+
+## 🔗 Using Dynamic Values for Attributes
+
+You are **not limited** to outputting dynamic content only between element tags. You can also set **dynamic values for attributes** (like `id` or `className`).
+
+### 📋 Code Snippet
+
+```jsx
+function App() {
+  const userName = 'Max';
+  return <p id={userName}>Hi, my name is {userName}!</p>;
+};
+```
+
+### ✨ Detailed Code Explanation
+
+  * **`id={userName}`**: Here, the `id` attribute of the paragraph element is set dynamically.
+      * The **`id`** is the attribute name.
+      * The **`=`** sign separates the attribute name from its value.
+      * The **`{userName}`** is the JavaScript expression whose value (`'Max'`) is assigned to the `id` attribute.
+
+When this component is rendered, the resulting HTML element will be `<p id="Max">Hi, my name is Max!</p>`.
+
+---
