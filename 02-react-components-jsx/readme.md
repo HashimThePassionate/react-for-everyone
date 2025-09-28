@@ -736,3 +736,76 @@ The translation process highlights the roles of the two main React packages:
 2.  **`react-dom` Package**: This package receives the Virtual DOM from `react` and is responsible for generating the final, specific **DOM-manipulating instructions** that the web browser must execute to update the web page.
 
 ---
+
+# 🚫 **Using React Without JSX**
+
+Since all **JSX code is ultimately transformed** into native JavaScript method calls, you can actually build React applications **without ever writing JSX**. You can skip JSX entirely and instead rely on the function that JSX is transformed into: **`React.createElement(...)`**.
+
+-----
+
+## 🏗️ Building Components with `React.createElement()`
+
+Instead of writing the HTML-like syntax of JSX in your components, you can explicitly call `React.createElement(...)` to create your elements. The two code snippets below will produce the exact same user interface in the browser.
+
+### 1\. JSX Version (Easy to Read)
+
+This is the standard, developer-friendly way to define a component:
+
+### 📋 Code Snippet
+
+```jsx
+function App() {
+  return (
+    <p>
+      Please visit my <a href="https://my-blog-site.com">Blog</a>
+    </p>
+  );
+};
+```
+
+### 2\. `React.createElement()` Version (What JSX Becomes)
+
+This version produces the exact same result but uses nested function calls:
+
+### 📋 Code Snippet
+
+```jsx
+function App() {
+  return React.createElement(
+    'p',
+    {},
+    [
+      'Please visit my ',
+      React.createElement(
+        'a',
+        { href: 'https://my-blog-site.com' },
+        'Blog'
+      )
+    ]
+  );
+};
+```
+
+### ✨ Detailed Code Explanation
+
+This code shows how the single JSX line is translated into a complex, nested function structure:
+
+1.  **Outer Element (`<p>`):** The outer `React.createElement('p', {}, ...)` call creates the paragraph element.
+2.  **Configuration (`{}`):** The empty object `{}` means the paragraph has no special attributes (like a `className`).
+3.  **Child Content (The Array):** The third argument is an **array** containing all the child nodes of the paragraph.
+      * **`'Please visit my '`**: The first element is simple text (a string).
+      * **`React.createElement('a', ...)`**: The second element is the anchor tag (`<a>`) created by a **nested** `createElement` call.
+          * It is configured with an object `{ href: 'https://my-blog-site.com' }`.
+          * Its child content is the text `'Blog'`.
+
+-----
+
+## 🔑 The Importance of JSX
+
+While using `React.createElement()` is technically possible, it is clear from the example that it is **significantly more cumbersome** and leads to code that can become **almost impossible to read** as element structures become more deeply nested.
+
+This is why React developers overwhelmingly use **JSX**. It is a **great feature** that makes building user interfaces much more enjoyable.
+
+The key takeaway remains: JSX is neither a built-in **HTML** feature nor a **vanilla JavaScript** feature. It is a powerful piece of **syntactical sugar** that is transformed into native JavaScript function calls behind the scenes. 🍬
+
+---
