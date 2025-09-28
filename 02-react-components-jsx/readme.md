@@ -425,6 +425,7 @@ root.render(<App />);
 
 The component passed to `root.render()` (usually `<App />`) is called the **Root Component**. All other components in the application are **nested** inside the JSX code of this `App` component or its descendant components.
 
+
 ---
 
 <div align="center">
