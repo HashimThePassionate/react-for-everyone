@@ -548,3 +548,60 @@ You may have heard of **Web Components**.
 * It is crucial to know that **React does not use this feature**. You **do not** build new custom HTML elements when using React. You build components that return standard HTML elements via a process of translation.
 
 ---
+
+# 🏷️ **Naming Conventions**
+
+Consistent naming is key in React development for clarity and to satisfy specific React rules. Two main conventions are used: one for the **component function name** and one for the **file name**.
+
+---
+
+## 💻 Component Function Naming (PascalCase)
+
+The naming convention used for component functions (like `SubmitButton`, `AuthForm`, or `Greeting`) is called **PascalCase**.
+
+### 🧐 What is PascalCase?
+
+* The first character of the name is **uppercase**.
+* Multiple words are joined into a single word, and **every "subword" starts with another uppercase character** (e.g., `SubmitButton` instead of "Submit Button").
+
+### 🚦 PascalCase as a Convention vs. Rule
+
+| Context | PascalCase Status | Reason |
+| :--- | :--- | :--- |
+| **Defining the function** (in the JavaScript code) | **Convention** | You *can* technically name the function whatever you want here, but PascalCase is the standard and highly recommended practice. |
+| **Using the component** (in the JSX code) | **Hard Rule** | **React forces** you to use an **uppercase starting character** when embedding custom components in JSX (e.g., `<SubmitButton />`). |
+
+### 🛑 Why the Hard Rule in JSX?
+
+React enforces the uppercase starting character in JSX to easily distinguish between your custom components and **built-in components** (HTML elements).
+
+* **Custom Component:** Starts with an **uppercase** letter (e.g., `<MyComponent />`). React knows to execute the corresponding function.
+* **Built-in Element:** Starts with a **lowercase** letter (e.g., `<div>`, `<p>`). React knows these should be translated into standard DOM elements.
+
+React only needs to look at the **starting character** to determine the type of element it is processing.
+
+---
+
+## 🗄️ File Naming Conventions
+
+Custom components are typically stored in separate files inside a dedicated folder.
+
+### 📁 Standard File Placement
+
+* The conventional location for component files is inside a **`src/components/`** folder.
+* The exact folder name and placement are flexible, but components should generally reside somewhere within the `src/` folder. The name `components/` is the common standard.
+
+### ✏️ File Naming Styles
+
+While the component function itself uses PascalCase, there is **no single general default** for the file name. Two common conventions are used:
+
+1.  **PascalCase (e.g., `App.jsx`, `SubmitButton.jsx`)**
+    * This is the style often used in brand-new React projects (e.g., `App.jsx`).
+    * It matches the component function name, which can simplify finding the component.
+
+2.  **Kebab-case (e.g., `submit-button.jsx`, `auth-form.jsx`)**
+    * This convention uses **all lowercase letters** with multiple words separated by a **dash** (`-`).
+
+Ultimately, the choice of file naming convention (PascalCase or kebab-case) is up to **you and your team**. This resource will use **PascalCase for file names** (e.g., `SubmitButton.jsx`).
+
+---
