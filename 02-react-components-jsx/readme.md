@@ -1023,3 +1023,134 @@ function App() {
 When this component is rendered, the resulting HTML element will be `<p id="Max">Hi, my name is Max!</p>`.
 
 ---
+
+# 🏞️ **Rendering Images**
+
+Most websites rely on images, not just plain text. When working with React, you use the standard **`<img>` element**. However, there are two key rules to follow in React projects:
+
+1.  The `<img>` tag **must be self-closing** (`<img ... />`).
+2.  When using **local images** from the `src/` folder, you **must import them**.
+
+-----
+
+## 🛑 Rule 1: Self-Closing Tag
+
+As established in the rules of JSX, elements that do not contain child content must be self-closing.
+
+  * In **regular HTML**, the forward backslash is optional for void elements: `<img src="path.jpg">`.
+  * In **JSX**, the self-closing forward slash is **mandatory**: `<img src="..." alt="..." />`.
+
+-----
+
+## 🔗 Rule 2: Handling Local Image Paths
+
+When displaying local images stored inside your project's `src/` folder, you **cannot** use a simple string path like you might in standard HTML (e.g., `src="./assets/my-image.png"`).
+
+### 🧐 The Problem with Direct Paths
+
+React projects created with tools like Vite involve a **build process**. When you run `npm run build`, a deployable **`dist`** folder is created, and the structure inside is different from your development `src/` folder.
+
+  * **Development Path:** You might have an image at `src/assets/my-image.png`.
+  * **Production Path (after build):** The `dist` folder **will not contain a `src/assets` folder**. Instead, your assets are typically renamed and placed in a general `dist/assets` folder.
+
+The figure below illustrates the built production structure:
+
+Since the final path of a locally stored image is **not known in advance**, attempting to use a direct path will cause the image to **fail to load** on the deployed website.
+
+### ✅ Solution 1: Importing the Image (Recommended for `src/`)
+
+To solve the path problem, you must **import the image file** into your `.jsx` file.
+
+**Step 1: Import the file:**
+
+```jsx
+import myImage from './assets/my-image.png';
+```
+
+**Step 2: Use the imported value:**
+
+```jsx
+function App() {
+  return <img src={myImage} alt="A description of the image" />;
+};
+```
+
+### ✨ Detailed Explanation of Image Import
+
+1.  **`import myImage from './assets/my-image.png';`**: This is not importing code; it instructs the build process to **analyze the image file**.
+2.  **Result:** The build process replaces this import with a **string value** that contains the final, correct path (which includes the unique file hash) that will work in production.
+3.  **Dynamic Value:** The resulting path string is then set as a **dynamic value** for the `src` attribute using curly braces: `src={myImage}`.
+
+This approach is the **sensible choice for most images** because the unique file name assigned by the pre-processing step allows files to be **cached more efficiently** by the browser.
+
+### ✅ Solution 2: Using the `public/` Folder (For Static Assets)
+
+If you store an image (or any asset) in the **`public/`** folder of your project, you can **directly reference its path**.
+
+  * The contents of the `public/` folder are simply **copied as-is** into the `dist/` folder, skipping the renaming/transpilation step.
+  * **Important:** The folder name `public/` is **not** included in the final URL path.
+
+**Example:** For an image stored at `public/images/demo.jpg`:
+
+```jsx
+function App() {
+  return <img src="/images/demo.jpg" alt="A demo image" />;
+};
+```
+
+### 🌎 Using Remote Images
+
+When using images stored on a remote server (e.g., a CDN), you simply use the full image URL as a static string:
+
+```jsx
+function App() {
+  return <img src="https://some-server.com/image.jpg" alt="Remote server image" />;
+};
+```
+
+-----
+
+# ✂️ When Should You Split Components?
+
+As you develop more complex applications, deciding when to split a single large component into multiple smaller components becomes a common question. While there is **no hard rule** you must follow, relying on one massive component or creating a separate component for every single HTML tag are both generally poor practices.
+
+### 💡 Rule of Thumb: Separate Data Entities
+
+A good practice is to create a separate React component for **every data entity that can be identified** in your UI.
+
+  * **Example:** For a to-do application, you can identify two entities:
+    1.  The **overall list** (the container).
+    2.  The **individual to-do item** (the repeating item).
+
+This suggests creating two separate components (e.g., `TodoList` and `Todo`).
+
+### ➕ Advantage of Component Splitting
+
+  * **Manageability:** Individual components become easier to manage because they contain **less code**.
+  * **Reusability:** Smaller components (like `Todo`) can be **reused** throughout the application or in different parts of the same list.
+
+### ❓ The Challenge: Reusability and Configurability
+
+When you split components, a new challenge arises: making them **reusable and configurable**.
+
+In the example below, all `Todo` items would be exactly the same because the component can't be configured to display different content:
+
+```jsx
+import Todo from './todo.jsx';
+
+function TodoList() {
+  return (
+    <ul>
+      <Todo /> {/* All look the same */}
+      <Todo />
+      <Todo />
+    </ul>
+  );
+};
+```
+
+To solve this, you need a way to pass data into the component, either through **custom attributes** (`<Todo title="Buy Milk" />`) or by passing **content** between the tags (`<Todo>Learn React!</Todo>`).
+
+This capability is provided by a key concept called **props**, which is covered next. 
+
+---
