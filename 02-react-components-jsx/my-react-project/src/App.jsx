@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <div>
+    <div>
       <h1>My React App 🚀</h1>
       <AuthForm />
     </div>
