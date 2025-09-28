@@ -280,7 +280,7 @@ When working with React, there are two primary ways you can define a component:
 2.  **Functional components (or "function components")**:
     * Components defined using **regular JavaScript functions**.
 
-React requires that components are defined as either a **function** or a **class**. Throughout this book, components will be built as **JavaScript functions**. 💻
+React requires that components are defined as either a **function** or a **class**. Throughout this section, components will be built as **JavaScript functions**. 💻
 
 ### 💡 Note on Component Types
 
@@ -312,3 +312,72 @@ Looking closely at the examples, several key characteristics define how componen
 6.  **Importing Features**:
     * Certain features (like `useState` from the `react` package) and other custom components (like `SubmitButton`) must be **imported** using the **`import` keyword** before they can be used. 📥
 
+---
+
+
+# ⚙️ **What Exactly Are Component Functions**?
+
+In React, the main type of component is a **function component** (or **functional component**). This is a crucial concept to understand.
+
+## 💡 Functions are JavaScript, Not React
+
+A **function** is a **regular JavaScript construct**. It is **not** a concept invented by React. This is key because **React is a JavaScript library** and leverages existing JavaScript features (like functions) rather than being a brand-new programming language.
+
+  * In React, regular JavaScript functions are used to **encapsulate** two things:
+    1.  **HTML-like code** (specifically, **JSX**).
+    2.  The **JavaScript logic** that belongs to that markup code.
+
+## 🎯 What Qualifies a Function as a React Component?
+
+Not every JavaScript function you write in a React project is a component.
+
+### ❌ Non-Component Functions
+
+Functions like the following example are just regular JavaScript utility functions and **do not qualify** as React components:
+
+### 📋 Code Snippet
+
+```javascript
+function calculate(a, b) {
+ return {sum: a + b};
+};
+```
+
+  * The `handleSubmit` function from the earlier `SubmitButton` example is also a regular JavaScript function, but it is **not** a React component itself. It is an **inner function** or **event handler**.
+
+### ✅ Component Functions
+
+A function will be treated as a component by React and can therefore be used like an HTML element in JSX code **only if** it returns a **renderable value**.
+
+  * **The Most Important Rule:** You can only use a function as a React component in JSX code if it is a function that **returns something that can be rendered by React**.
+  * In the previous examples, `SubmitButton` and `AuthForm` qualified as components because they both **returned JSX code**, which is a renderable value.
+
+Once a function qualifies as a React component, you can use it inside of JSX code just like an HTML element (e.g., `<SubmitButton />`), similar to how you use a built-in HTML element (like `<input />`).
+
+-----
+
+## 📞 How Components are Executed
+
+When working with vanilla JavaScript, you typically **call functions yourself** to execute them (e.g., `calculate(5, 3)`).
+
+With functional components, the process is different:
+
+  * **React calls these functions on your behalf.**
+  * As a developer, you simply **use them like HTML elements** inside the JSX code. This tells React, "Please render the output of this function here."
+
+-----
+
+## 🎨 Note on Renderable Values
+
+The concept of a "renderable value" is important because it defines what a component is allowed to show on the screen.
+
+While the most common and logical value type to return is indeed **JSX code** (because it allows you to define the structure and content of your user interface), there are a few other types of values that also qualify as renderable:
+
+  * **JSX Code (Markup)**: The most frequent return value.
+  * **Strings**: Plain text.
+  * **Numbers**: Numerical values.
+  * **Arrays**: An array can hold other renderable values, such as **JSX elements, strings, or numbers**.
+
+*You will see examples of components returning non-JSX code in later lessons (for instance, in later section, covering Portals and Refs).*
+
+---
