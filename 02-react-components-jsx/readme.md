@@ -507,3 +507,44 @@ By following this traversal and translation process, React successfully renders 
 
 
 ---
+
+# 🧱 **Built-In Components and the Core of React**
+
+As a React developer, a major part of your work is creating **custom component functions** that return JSX code. However, it is essential to understand what these custom components ultimately become when they are rendered.
+
+---
+
+## 🧐 The Final Form of JSX
+
+If you were to trace all your custom components (like `SubmitButton` and `App`) and merge their returned JSX code into a single large snippet, the final result would only contain **standard, built-in HTML elements** such as `<div>`, `<h1>`, `<p>`, and `<button>`.
+
+* **Custom Components vs. Browser:** When you use React, you are **not** creating brand-new HTML elements that the browser can natively understand.
+* **React's Role:** Your custom components only work within the React environment. Before they reach the browser, React **evaluates** them and **translates** the structure into standard **DOM-manipulating JavaScript instructions** (like `document.createElement(...)` and `document.append(...)`).
+
+## 💡 JSX is Syntactical Sugar
+
+It is very important to remember that all the HTML-like code you write in a `.jsx` file (**JSX**) is **not** plain HTML.
+
+* **JSX is not JavaScript:** JSX is a feature that is **not part of the standard JavaScript language**.
+* **JSX is Syntactical Sugar:** It is a **simplification** (or "syntactical sugar") provided by the React library and your project setup. It makes it easier to write structure within your JavaScript code.
+
+Therefore, elements like `<div>` that you see in JSX are **not normal HTML elements** inside the file; they are part of this special JSX code syntax.
+
+---
+
+## 🧩 Built-In Primitives
+
+The elements that look like standard HTML (like `<div>` and `<button>`) are actually **built-in components** provided by the React environment (specifically, by **`ReactDOM`**).
+
+* **Primitives:** When working with React, you always end up with these **primitives**—these **built-in component functions**—which are the lowest level.
+* **The Translation:** These primitives are the components that are later translated into the final browser instructions to generate and manipulate regular **DOM elements**.
+* **The Idea:** The goal of building your custom components is simply to **group** these built-in elements together, creating **reusable building blocks** for the overall UI. In the end, the user interface displayed in the browser is still made up of regular HTML elements.
+
+### 📜 Note on Web Components
+
+You may have heard of **Web Components**.
+
+* The idea behind Web Components is that you **can** build brand-new, custom HTML elements using vanilla JavaScript.
+* It is crucial to know that **React does not use this feature**. You **do not** build new custom HTML elements when using React. You build components that return standard HTML elements via a process of translation.
+
+---
