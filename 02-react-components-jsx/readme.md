@@ -605,3 +605,134 @@ While the component function itself uses PascalCase, there is **no single genera
 Ultimately, the choice of file naming convention (PascalCase or kebab-case) is up to **you and your team**. This resource will use **PascalCase for file names** (e.g., `SubmitButton.jsx`).
 
 ---
+
+# 🔄 **JSX vs. HTML vs. Vanilla JavaScript**
+
+React projects are filled with **JSX code** because most custom components return JSX. Understanding how JSX relates to standard web technologies is crucial.
+
+-----
+
+## 💻 What Exactly is JSX?
+
+**JSX** (JavaScript XML) is a **syntax extension** that allows you to write HTML-like structures directly within your JavaScript code.
+
+| Feature | Description |
+| :--- | :--- |
+| **Not Vanilla JavaScript** | JSX is **not** a native part of the JavaScript language. |
+| **Not Directly React** | It is also **not** directly part of the core React library itself. |
+| **Syntactical Sugar** | JSX is **syntactical sugar** provided by the **build workflow** (like Vite) of your React project. |
+
+### 🛠️ The Build Process Transformation
+
+When you run development commands (`npm run dev`) or build for production (`npm run build`), a process kicks off that **transforms** the JSX code back into regular, executable JavaScript instructions. React, the library, evaluates these final instructions, not the JSX itself.
+
+For example, the JSX:
+
+```jsx
+function Ld() {
+  return <p>Welcome to this book!</p>;
+}
+```
+
+Gets transformed into complex, unreadable JavaScript (which is executed by the browser):
+
+```javascript
+function Ld() {
+  return St.jsx('p', { children: 'Welcome to this book!' });
+}
+```
+
+-----
+
+## 🧩 JSX vs. React's `createElement()`
+
+The core of what JSX becomes is a call to a built-in React method: **`React.createElement(...)`**. This shows you exactly what React is doing under the hood, even though you typically don't write this code yourself.
+
+### Example 1: Simple Element
+
+The following JSX snippet:
+
+```jsx
+function Greeting() {
+  return <p>Hello World!</p>;
+};
+```
+
+Is functionally identical to the following code using `React.createElement()`:
+
+```jsx
+function Greeting() {
+  return React.createElement('p', {}, 'Hello World!');
+};
+```
+
+### ⚙️ How `createElement()` Works
+
+The `React.createElement()` method takes three main arguments:
+
+1.  **Element Type** (`'p'`, in the example): The type of built-in component (which corresponds to an HTML tag name).
+2.  **Configuration Object** (`{}`): A JavaScript object that holds extra configuration or **props** for the element (e.g., attributes like `className`, `onClick`, or `href`).
+3.  **Child Content** (`'Hello World!'`): The content that should be rendered **inside** the element (between the opening and closing tags).
+
+### Example 2: Element with Configuration
+
+The JSX snippet:
+
+```jsx
+function Advertisement() {
+  return <a href="https://my-website.com">Visit my website</a>;
+};
+```
+
+Is transformed to include the attribute in the configuration object:
+
+```jsx
+function Advertisement() {
+  return React.createElement(
+    'a',
+    { href: 'https://my-website.com' },
+    'Visit my website'
+  );
+};
+```
+
+### Example 3: Nested Elements
+
+For nested JSX elements, `createElement()` calls are also **nested**:
+
+The JSX snippet:
+
+```jsx
+function Alert() {
+  return (
+    <div>
+      <h2>This is an alert!</h2>
+    </div>
+  );
+};
+```
+
+Is transformed into nested `createElement` calls:
+
+```jsx
+function Alert() {
+  return React.createElement(
+    'div',
+    {},
+    React.createElement('h2', {}, 'This is an alert!')
+  );
+};
+```
+
+The **third argument** of the outer `'div'` element is the entire **`React.createElement('h2', ...)`** call.
+
+-----
+
+## 🏛️ React Package Collaboration
+
+The translation process highlights the roles of the two main React packages:
+
+1.  **`react` Package**: This package handles the internal creation of elements and manages the structure via a concept called the **Virtual DOM** (covered in Chapter 10).
+2.  **`react-dom` Package**: This package receives the Virtual DOM from `react` and is responsible for generating the final, specific **DOM-manipulating instructions** that the web browser must execute to update the web page.
+
+---
