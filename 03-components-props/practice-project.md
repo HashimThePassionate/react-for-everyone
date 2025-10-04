@@ -26,10 +26,10 @@ This project demonstrates how to create and use **multiple React components** (H
 
 ### 1️⃣ Create a New React Project
 
-Run the following command (replace `my-app` with any name):
+Run the following command (replace `my-react-project` with any name):
 
 ```bash
-npm create vite@latest my-app
+npm create vite@latest my-react-project
 ```
 
 * Choose **React**
@@ -38,7 +38,7 @@ npm create vite@latest my-app
 Move into the project folder and start the dev server:
 
 ```bash
-cd my-app
+cd my-react-project
 npm install
 npm run dev
 ```
