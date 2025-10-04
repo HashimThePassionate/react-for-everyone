@@ -3,6 +3,26 @@
 
 So far, the components we've discussed have been static, with limited reusability. While they help in organizing code into smaller blocks, creating a new component for every single list item, for example, is not efficient. The true power of React components comes from making them **reusable** and **configurable**, much like standard HTML elements. ✨
 
+<br/>
+
+<details>
+<summary>📑 Table of Contents</summary>
+
+- [The Analogy of HTML Elements](#-the-analogy-of-html-elements)
+- [Introducing Props](#-introducing-props)
+- [Using Props in Components](#-using-props-in-components)
+  - [Passing Props to a Component](#️-passing-props-to-a-component)
+  - [Consuming Props in a Component](#️-consuming-props-in-a-component)
+- [Components, Props, and Reusability](#-components-props-and-reusability)
+  - [The Special Children Prop](#-the-special-children-prop)
+- [Which Components Need Props?](#which-components-need-props-)
+- [Handling Multiple Props in React](#-handling-multiple-props-in-react)
+- [Understanding Prop Drilling](#️-understanding-prop-drilling)
+
+</details>
+
+<br/>
+
 -----
 
 ## 🎯 The Analogy of HTML Elements
