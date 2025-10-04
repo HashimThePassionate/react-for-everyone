@@ -138,3 +138,20 @@ function GoalItem(props) {
   * **Dynamic Content**: By placing `{props.children}` within the JSX, you are telling React to render this dynamic content in the specified location. This allows a single component to be flexible and display different content each time it's used.
 
 ---
+
+# **Which Components Need Props**? 🚀
+
+The need for a component to use props depends entirely on its purpose and role within an application. There's no strict rule to determine this.
+
+
+### When to Use Props 🤔
+
+* **Components Requiring External Data:** Components that need data from a parent component to render correctly, such as a `GoalItem` component that displays specific goal text, will need to use props.
+* **Reusable Components:** If a component is used multiple times throughout your React app, there's a high chance it will utilize props. For example, a `Card` component could use props to display different content or styles each time it's rendered.
+
+
+### When Not to Use Props 🚫
+
+* **Self-Contained Components:** A component that has all its required data hardcoded and doesn't need to change based on external input may not need props. An example is a general `Header` component that displays a static logo and title.
+
+---
