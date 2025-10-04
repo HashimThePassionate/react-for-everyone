@@ -1,132 +1,104 @@
-# 🎯 **React Practice Goals Project**
-
-A beginner-friendly React project built with **Vite**.
-This project demonstrates how to create and use **multiple React components** (Header, GoalList, Goals, etc.) in a clean structure.
+# 📘 **React Goals Project**
 
 <details>
-<summary>📑 Table of Contents</summary>
+<summary>📋 Table of Contents</summary>
 
-- [🎯 **React Practice Goals Project**](#-react-practice-goals-project)
-  - [🚀 Getting Started](#-getting-started)
-    - [1️⃣ Create a New React Project](#1️⃣-create-a-new-react-project)
-    - [2️⃣ Create Components Folder](#2️⃣-create-components-folder)
-    - [3️⃣ Add Component Files](#3️⃣-add-component-files)
-    - [4️⃣ Create Goal Components](#4️⃣-create-goal-components)
-    - [5️⃣ Create Goal List Component](#5️⃣-create-goal-list-component)
-    - [6️⃣ Create Header Component](#6️⃣-create-header-component)
-    - [7️⃣ Update App Component](#7️⃣-update-app-component)
-  - [✨ Final Output](#-final-output)
-  - [📚 What You’ll Learn](#-what-youll-learn)
+- [📘 **React Goals Project**](#-react-goals-project)
+  - [📂 Updated Project Structure](#-updated-project-structure)
+  - [⚡ Steps](#-steps)
+    - [1. Start with Previous Project](#1-start-with-previous-project)
+    - [2. Create `GoalItem` Component](#2-create-goalitem-component)
+    - [3. Update `GoalList` Component](#3-update-goallist-component)
+    - [4. Clean Up Old Files](#4-clean-up-old-files)
+    - [5. Final App](#5-final-app)
+  - [🎯 Final Result](#-final-result)
+  - [💡 Learnings](#-learnings)
 
 </details>
 
----
+<br/>
 
-## 🚀 Getting Started
-
-### 1️⃣ Create a New React Project
-
-Run the following command (replace `my-react-project` with any name):
-
-```bash
-npm create vite@latest my-react-project
-```
-
-* Choose **React**
-* Choose **JavaScript**
-
-Move into the project folder and start the dev server:
-
-```bash
-cd my-react-project
-npm install
-npm run dev
-```
-
-Your project will now be running at **[http://localhost:5173/](http://localhost:5173/)** 🎉
+This activity builds on the previous project folder 02-react-components.
+We'll refactor our app to use **a single reusable component** instead of multiple goal components.
 
 ---
 
-### 2️⃣ Create Components Folder
+**React Goals Project**
 
-Inside the `src/` folder, create a folder named:
-
-```
-src/components
-```
+This activity builds on the previous project folder 02-react-components.
+We’ll refactor our app to use **a single reusable component** instead of multiple goal components.
 
 ---
 
-### 3️⃣ Add Component Files
+## 📂 Updated Project Structure
 
-Create these files inside `/src/components`:
-
-```
-FirstGoal.jsx
-SecondGoal.jsx
-ThirdGoal.jsx
-GoalList.jsx
-Header.jsx
-```
-
-Your folder structure will look like this:
+After finishing this activity, your `src/components/` folder will look like this:
 
 ```
-src/
- ├── components/
- │   ├── FirstGoal.jsx
- │   ├── SecondGoal.jsx
- │   ├── ThirdGoal.jsx
- │   ├── GoalList.jsx
- │   └── Header.jsx
- ├── App.jsx
- ├── main.jsx
- └── index.css
+src/components/
+├── GoalItem.jsx
+├── GoalList.jsx
+└── Header.jsx
 ```
+
+👉 The old files (`FirstGoal.jsx`, `SecondGoal.jsx`, `ThirdGoal.jsx`) are **deleted** because they’re no longer needed.
 
 ---
 
-### 4️⃣ Create Goal Components
+## ⚡ Steps
 
-Example (`FirstGoal.jsx`):
+### 1. Start with Previous Project
+
+Make sure you’ve completed **Activity 2.1** (React app with multiple components).
+
+---
+
+### 2. Create `GoalItem` Component
+
+Inside `src/components/`, create a new file:
+
+**`GoalItem.jsx`**
 
 ```jsx
-function FirstGoal() {
+function GoalItem(props) {
   return (
     <li>
       <article>
-        <h2>Teach React in a highly-understandable way</h2>
-        <p>
-          I want to ensure, that you get the most out of this book 
-          and you learn all about React!
-        </p>
+        <h2>{props.title}</h2>
+        <p>{props.children}</p>
       </article>
     </li>
   );
 }
 
-export default FirstGoal;
+export default GoalItem;
 ```
 
-👉 Repeat similar steps for `SecondGoal.jsx` and `ThirdGoal.jsx` with your own text.
+✔ We added a `props` parameter
+✔ `props.title` is used for the heading
+✔ `props.children` is used for the paragraph
 
 ---
 
-### 5️⃣ Create Goal List Component
+### 3. Update `GoalList` Component
 
-`GoalList.jsx`:
+Edit **`GoalList.jsx`** and replace the old goal components with `<GoalItem />`.
 
 ```jsx
-import FirstGoal from './FirstGoal.jsx';
-import SecondGoal from './SecondGoal.jsx';
-import ThirdGoal from './ThirdGoal.jsx';
+import GoalItem from './GoalItem.jsx';
 
 function GoalList() {
   return (
     <ul>
-      <FirstGoal />
-      <SecondGoal />
-      <ThirdGoal />
+      <GoalItem title="Teach React in a highly-understandable way">
+        I want to ensure you learn React in the easiest way possible.
+      </GoalItem>
+      <GoalItem title="Allow you to practice what you learned">
+        Practice makes perfect! Apply concepts immediately.
+      </GoalItem>
+      <GoalItem title="Motivate you to continue learning">
+        Stay consistent and keep growing as a React developer.
+      </GoalItem>
     </ul>
   );
 }
@@ -136,27 +108,21 @@ export default GoalList;
 
 ---
 
-### 6️⃣ Create Header Component
+### 4. Clean Up Old Files
 
-`Header.jsx`:
+❌ Delete these redundant files from `src/components/`:
 
-```jsx
-function Header() {
-  return (
-    <header>
-      <h1>My Goals For This Book</h1>
-    </header>
-  );
-}
+* `FirstGoal.jsx`
+* `SecondGoal.jsx`
+* `ThirdGoal.jsx`
 
-export default Header;
-```
+Now, you only have **`GoalItem.jsx`**, **`GoalList.jsx`**, and **`Header.jsx`**.
 
 ---
 
-### 7️⃣ Update App Component
+### 5. Final App
 
-Finally, replace the default code in `App.jsx`:
+Your `App.jsx` stays the same:
 
 ```jsx
 import GoalList from './components/GoalList.jsx';
@@ -178,23 +144,21 @@ export default App;
 
 ---
 
-## ✨ Final Output
+## 🎯 Final Result
 
-✅ A **Header** with the title *"My Goals For This Book"*
-✅ A **list of goals**, each displayed as its own reusable component.
+When you open the app, you should see:
 
----
-
-## 📚 What You’ll Learn
-
-* ✔ Creating and exporting React components
-* ✔ Importing components into other components
-* ✔ Structuring a React project with multiple files
-* ✔ Rendering reusable JSX
+* A header: **"My Goals For This Book"**
+* A list of goals rendered by the **reusable `GoalItem` component**.
 
 ---
 
-🔗 Now you can extend this project by adding **styles, props, and interactivity**!
+## 💡 Learnings
+
+✔ How to create **reusable components** with `props`
+✔ Using `props.children` to pass flexible content
+✔ Refactoring code to remove redundancy
 
 ---
 
+✨ Congratulations! You’ve just made your React codebase **cleaner, more scalable, and easier to maintain**.
