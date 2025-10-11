@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* IMPORTANT: This style needs a background image to look good */
+  background-image: linear-gradient(to right top, #6d327c, #485DA6, #00a1ba, #00BF98, #36C486);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* --- Main App Container (The Glass) --- */
+.App {
+  width: 100%;
+  max-width: 550px;
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
+  backdrop-filter: blur(12px); /* The magic blur effect */
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  padding: 2.5rem;
+  color: white;
+}
+
+/* --- Calculation Input Form --- */
+.calculation-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.calculation-form input,
+.calculation-form select {
+  font-family: 'Inter', sans-serif;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 10px;
+  padding: 1.2rem; /* Padding barha di hai */
+  font-size: 2rem; /* Font size kafi barha diya hai */
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.calculation-form input {
+  width: 180px; /* Input ke liye width set kar di hai */
+}
+
+.calculation-form select {
+  width: 100px; /* Dropdown ka width bhi adjust kiya hai */
+}
+
+.calculation-form input::placeholder { /* Style placeholder text */
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.calculation-form select {
+  width: 80px;
+}
+
+.calculation-form input:focus,
+.calculation-form select:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* --- Result Display Area --- */
+.result-display {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+.result-display p {
+  margin: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.result-display .result-value {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 600px) {
+  .calculation-form {
+    flex-direction: column;
+  }
+  .calculation-form input,
+  .calculation-form select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
