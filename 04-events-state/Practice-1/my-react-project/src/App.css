@@ -1,0 +1,96 @@
+/* General body styling */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+  color: #1c1e21;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1rem; /* Added padding for very small screens */
+  box-sizing: border-box; /* Ensures padding doesn't add to width */
+}
+
+/* Main container for the calculator */
+#root {
+  background-color: #ffffff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Main heading */
+h1 {
+  color: #1877f2;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+/* Styling for each operation's paragraph */
+p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f7f8fa;
+  border-radius: 8px;
+}
+
+/* Styling for the input fields */
+input[type="number"] {
+  width: 100px;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccd0d5;
+  border-radius: 6px;
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Style for input field on focus */
+input[type="number"]:focus {
+  outline: none;
+  border-color: #1877f2;
+  box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+}
+
+/* =================================== */
+/* ==   RESPONSIVE STYLES (MOBILE)  == */
+/* =================================== */
+
+@media (max-width: 600px) {
+  /* Main container ke padding kam karein */
+  #root {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Heading ka font size chota karein */
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Paragraph ka font size aur padding kam karein */
+  p {
+    font-size: 1.1rem;
+    padding: 0.75rem;
+    flex-wrap: wrap; /* Agar zaroorat ho to wrap karein */
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* Input fields ko flexible banayein */
+  input[type="number"] {
+    width: 80px; /* Width ko thora kam kiya */
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+}
