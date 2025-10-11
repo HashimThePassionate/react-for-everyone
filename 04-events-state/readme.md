@@ -511,3 +511,137 @@ React is flexible, allowing you to manage all these data types as state. You can
 > If the distinction between primitive and reference data types in JavaScript is not clear, it is strongly recommended to review this core concept. You can find a helpful guide [here](https://academind.com/tutorials/reference-vs-primitive-values).
 
 ---
+
+
+# 🗂️ **Managing Multiple States in a React Component**
+
+In a single component, you can manage multiple independent pieces of state, often called **state slices**, by simply calling the `useState()` Hook multiple times. Let's explore the two primary approaches for handling this.
+
+-----
+
+## ✅ Approach 1: Using Multiple State Slices
+
+The most straightforward method is to declare a separate state for each value you need to track.
+
+### Code Example
+
+Consider a simplified `LoginForm` component that needs to manage both an email and a password.
+
+```javascript
+function LoginForm() {
+  const [enteredEmail, setEnteredEmail] = useState('');
+  const [enteredPassword, setEnteredPassword] = useState('');
+
+  function handleUpdateEmail(event) {
+    setEnteredEmail(event.target.value);
+  };
+
+  function handleUpdatePassword(event) {
+    setEnteredPassword(event.target.value);
+  };
+
+  // Props are split across multiple lines for better readability
+  return (
+    <form>
+      <input
+        type="email"
+        placeholder="Your email"
+        onBlur={handleUpdateEmail} />
+      <input
+        type="password"
+        placeholder="Your password"
+        onBlur={handleUpdatePassword} />
+    </form>
+  );
+};
+```
+
+### Explanation
+
+  * **`const [enteredEmail, setEnteredEmail] = useState('');`**: The first call to `useState` registers and manages the state for the email input.
+  * **`const [enteredPassword, setEnteredPassword] = useState('');`**: The second call to `useState` registers and manages an entirely separate state for the password input.
+  * **Independent Updates**: Each state has its own updating function (`setEnteredEmail` and `setEnteredPassword`), allowing you to modify one value without affecting the other.
+
+You can register as many state slices as you need. However, if a component requires dozens of state slices, it's often a sign that the component has too many responsibilities and should be broken down into smaller, more focused components.
+
+> ### 🧠 A Note on Naming Conventions
+>
+> In the example, the event handler functions are named `handleUpdateEmail` and `handleUpdatePassword`. Using a `handle...` prefix is a common convention among React developers to make it clear that a function's purpose is to handle a user-triggered event. This is an optional but helpful practice for code readability.
+
+### Pros and Cons
+
+  * **Advantage**: The biggest advantage is **simplicity and independence**. Updating the email state does not require you to think about or touch the password state.
+  * **Disadvantage**: For components with many state values, multiple `useState()` calls can lead to more lines of code at the top of your component.
+
+-----
+
+## 🧠 Approach 2: Managing a Merged State Object
+
+An alternative is to group related state values into a single object and manage it with one `useState()` call.
+
+### Code Example
+
+Here is the same `LoginForm` component using a single state object.
+
+```javascript
+function LoginForm() {
+  const [userData, setUserData] = useState({
+    email: '',
+    password: ''
+  });
+
+  function handleUpdateEmail(event) {
+    setUserData({
+      email: event.target.value,
+      password: userData.password // Manually carry over the old password
+    });
+  };
+
+  function handleUpdatePassword(event) {
+    setUserData({
+      email: userData.email, // Manually carry over the old email
+      password: event.target.value
+    });
+  };
+  // The returned JSX code is the same as before
+};
+```
+
+### Explanation
+
+  * **`useState({ email: '', password: '' })`**: We call `useState` only once, passing an initial object that contains properties for both email and password.
+  * **`userData`**: This state variable now holds the entire object.
+  * **`setUserData`**: This function is used to update the entire `userData` object.
+
+### ⚠️ A Critical Pitfall: Overwriting State
+
+When you use the state-updating function for an object, the value you pass to it **completely replaces** the old state object. It does not merge them automatically.
+
+This is a common source of bugs. If you only provide the property that changed, the other properties will be lost.
+
+**Incorrect Update:**
+
+```javascript
+// This is WRONG! The password property will be deleted.
+setUserData({ email: event.target.value }); 
+```
+
+**Correct Update:**
+To prevent this, you must manually include all the other properties from the previous state object. As seen in the example, when updating the email, you must also include `password: userData.password` to ensure it isn't lost.
+
+> ### 📝 A Note on State Updates
+>
+> The method shown above for updating state based on previous state (`userData.password`) works, but it is not the recommended best practice. A more robust pattern for this scenario will be covered later.
+
+-----
+
+## 🤔 Which Approach Should You Choose?
+
+There is no single "right" way; both approaches are valid. The choice often comes down to preference and the specific use case.
+
+However, the best practice in React is **component composition**. Instead of building one massive component that handles many different tasks and state values, you should break it down into smaller, specialized components.
+
+When you follow this principle, most of your components will only need to manage a few pieces of state. In that context, using **multiple, independent state slices (Approach 1)** is often cleaner, less error-prone, and easier to manage. You will likely find yourself using a few distinct `useState()` calls per component far more often than large, merged state objects.
+
+
+---
