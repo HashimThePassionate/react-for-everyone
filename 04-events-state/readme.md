@@ -881,3 +881,106 @@ By using two-way binding, when `setEmail('')` is called, React re-renders the co
 
 
 ---
+
+# ⛓️ Deriving Values from State
+
+State is a cornerstone of React, allowing you to manage data that triggers UI updates when it changes. While you can use state values directly anywhere in your component, a powerful and common pattern is to use that state as a foundation to **derive** other values.
+
+-----
+
+## Using State Directly
+
+First, let's look at a basic example where a state value is used directly. The `Repeater` component simply stores user input in state and displays it back to the user.
+
+```javascript
+function Repeater() {
+  const [userInput, setUserInput] = useState('');
+
+  function handleChange(event) {
+    setUserInput(event.target.value);
+  };
+
+  return (
+    <>
+      <input onChange={handleChange} value={userInput} />
+      <p>You entered: {userInput}</p>
+    </>
+  );
+};
+```
+
+This component works perfectly, but often you'll need to perform more complex operations with your state.
+
+-----
+
+## Deriving a New Value from State
+
+Instead of just repeating user input, you might want to calculate something based on it, like counting the number of characters.
+
+```javascript
+function CharCounter() {
+  const [userInput, setUserInput] = useState('');
+
+  function handleChange(event) {
+    setUserInput(event.target.value);
+  };
+
+  // The new value is derived here
+  const numChars = userInput.length;
+
+  return (
+    <>
+      <input onChange={handleChange} value={userInput} />
+      <p>Characters entered: {numChars}</p>
+    </>
+  );
+};
+```
+
+### Explanation
+
+The key addition here is the `numChars` constant.
+
+  * **`const numChars = userInput.length;`**: This line takes the current `userInput` state value (which is a string) and calculates its length. The result is stored in a regular constant named `numChars`.
+
+> **This is an important concept\!** You are not limited to only working with state values. You should keep your core, essential data in state (the data that changes, like `userInput`) and then **derive** any other necessary values from that state on each render. This keeps your state minimal and avoids potential synchronization issues. `numChars` does **not** need to be a state variable itself.
+
+-----
+
+## How Derivation Works During a Re-render
+
+You might wonder why `numChars` can be a constant and is defined directly inside the component function, not inside the `handleChange` handler. This works because of how React handles state updates.
+
+When you call a state-updating function (like `setUserInput`), React schedules a **re-evaluation** of the component. This means the entire component function (`CharCounter` in this case) is executed again from top to bottom.
+
+Here’s the step-by-step process:
+
+1.  A user types a character, triggering the `handleChange` function.
+2.  `setUserInput()` is called with the new input value.
+3.  React re-executes the `CharCounter` component function.
+4.  During this new execution, the `useState()` Hook provides the **new, updated `userInput` value**.
+5.  The line `const numChars = userInput.length;` is executed again, calculating a brand-new value for `numChars` based on the updated `userInput`.
+6.  The JSX is returned with the new `numChars` value, and React updates the DOM to display it.
+
+Because the entire function runs again, a brand-new `numChars` constant is created for that specific render cycle. The old one from the previous render is simply discarded. This is why it can be a `const` even though its value changes between renders.
+
+---
+
+<div align="center">
+  <img src="./images/02.png"/>
+</div>
+
+
+
+## Visualizing the Flow
+
+The provided diagram illustrates this relationship perfectly.
+
+### Diagram Explanation
+
+  * **`CharCounter` Component**: This is the container for our logic.
+  * **`userInput` (const State value)**: This is the core piece of data managed by React state.
+  * **`numChars` (const value)**: This is a regular constant whose value is **derived** from the `userInput` state on every render. The arrow shows that its value is calculated using `userInput.length`.
+  * **Re-execution**: The entire component function runs again whenever the `userInput` state is updated. This re-execution is what triggers the re-derivation of `numChars`, ensuring it is always in sync with the current state.
+
+---
