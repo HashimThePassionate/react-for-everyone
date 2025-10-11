@@ -180,3 +180,112 @@ Despite its better structure, this approach is still destined to fail for two fu
 To create a working, dynamic component, we must solve these two problems. The correct implementation will fully embrace React's features, avoiding any mix of React and non-React code for DOM manipulation and state management. The result will be simpler, cleaner, and more efficient code.
 
 ---
+
+# 🚀 **Improving the Solution: Handling Events the React Way**
+
+Instead of mixing imperative JavaScript code (like `document.querySelector('input')`) with your React code, the best approach is to fully embrace the features React provides. Listening to events is an extremely common task, and React has a powerful, built-in solution for it: attaching event listeners directly to your JSX elements.
+
+-----
+
+## ✅ The Correct Way to Listen to Events
+
+By using React's event system, the previous example can be rewritten to handle events correctly.
+
+```javascript
+function EmailInput() {
+  let errorMessage = '';
+
+  function evaluateEmail(event) {
+    const enteredEmail = event.target.value;
+    if (enteredEmail.trim() === '' || !enteredEmail.includes('@')) {
+      errorMessage = 'The entered email address is invalid.';
+    } else {
+      errorMessage = '';
+    }
+  };
+
+  return (
+    <div>
+      <input 
+        placeholder="Your email" 
+        type="email" 
+        onBlur={evaluateEmail} 
+      />
+      <p>{errorMessage}</p>
+    </div>
+  );
+};
+```
+
+#### Code Explanation
+
+While this code **still won't update the UI dynamically**, the event is now handled properly without causing errors.
+
+  * **`onBlur={evaluateEmail}`**: This is the key change. The `onBlur` prop is added directly to the `<input>` JSX element. This is React's built-in way to listen for the "blur" event (when an element loses focus). Its value is set to `{evaluateEmail}`, which points to our validation function.
+
+-----
+
+## 💡 Understanding Event Props
+
+React provides components for all standard HTML elements (like `<div>`, `<input>`, `<p>`, etc.). These components come with props that correspond to standard HTML attributes, plus some special ones for handling events.
+
+> React exposes all standard DOM events as `onXYZ` props, where `XYZ` is the name of the event with the first letter capitalized.
+
+For example:
+
+  * To react to a `blur` event, you use the **`onBlur`** prop.
+  * To listen for a `click` event, you use the **`onClick`** prop.
+
+These event props require a **function** as their value. This function will be automatically executed by React whenever the corresponding event occurs on that element. In our example, the `onBlur` prop receives a pointer to the `evaluateEmail` function.
+
+### A Quick Note on Functions: Reference vs. Execution
+
+It is crucial to understand the difference between passing a function reference and executing a function.
+
+  * `evaluateEmail`: This is a **pointer** or **reference** to the function itself. We are telling React, "Here is the function to execute later when the event happens." This is the correct way to assign an event handler.
+  * `evaluateEmail()`: This **executes** the function immediately and assigns its return value (if any) to the prop. This is incorrect for event handlers, as it would run the function during rendering, not when the event occurs.
+
+This is a standard JavaScript concept. For a more detailed explanation, you can refer to the [MDN Web Docs on Events](https://www.google.com/search?q=https://developer.mozilla.org/en-US/docs/Web/Events%23event_listing).
+
+-----
+
+## 🔍 Verifying the Event Handler
+
+With the `onBlur` prop correctly implemented, our code now executes without any errors. You can verify that the event handler is working by adding a `console.log()` statement inside the `evaluateEmail` function.
+
+```javascript
+function EmailInput() {
+  let errorMessage = '';
+
+  function evaluateEmail(event) {
+    console.log('Hello'); // This will now work!
+    const enteredEmail = event.target.value;
+    if (enteredEmail.trim() === '' || !enteredEmail.includes('@')) {
+      errorMessage = 'The entered email address is invalid.';
+    } else {
+      errorMessage = '';
+    }
+  };
+
+  return (
+    <div>
+      <input 
+        placeholder="Your email" 
+        type="email" 
+        onBlur={evaluateEmail} 
+      />
+      <p>{errorMessage}</p>
+    </div>
+  );
+};
+```
+
+Now, when you type in the input field and then click away (triggering the blur event), the text `'Hello'` will appear in your browser's developer console.
+
+-----
+
+## 🚧 The Lingering Problem: A Static UI
+
+This is a significant step toward the final solution. The event handling is now clean, error-free, and follows React best practices. However, the main goal has not yet been achieved: the UI still does not update dynamically when the `errorMessage` variable changes.
+
+---
