@@ -1,5 +1,67 @@
 # 🚀 **Conditional Content and List Data**
 
+<details open>
+<summary>📋 Table of Contents</summary>
+
+- [🚀 **Conditional Content and List Data**](#-conditional-content-and-list-data)
+  - [❓ What is Conditional Content?](#-what-is-conditional-content)
+  - [📜 What is List Data?](#-what-is-list-data)
+- [💻 **Rendering Content Conditionally**](#-rendering-content-conditionally)
+    - [Figure 5.1: Initial View](#figure-51-initial-view)
+    - [Figure 5.2: View After Click](#figure-52-view-after-click)
+    - [Initial (Non-Conditional) Code](#initial-non-conditional-code)
+    - [Approach 1: Using Conditional Values (with a Flaw)](#approach-1-using-conditional-values-with-a-flaw)
+      - [Code Explanation dissected](#code-explanation-dissected)
+      - [⚠️ The Problem with This Approach](#️-the-problem-with-this-approach)
+    - [Figure 5.3: An Empty Paragraph Element in the DOM](#figure-53-an-empty-paragraph-element-in-the-dom)
+    - [Approach 2: Using Conditional Elements (The Correct Way)](#approach-2-using-conditional-elements-the-correct-way)
+      - [Code Explanation dissected](#code-explanation-dissected-1)
+      - [✅ The Result](#-the-result)
+- [🚀 **Different Ways of Rendering Content Conditionally**](#-different-ways-of-rendering-content-conditionally)
+  - [1. Utilizing Ternary Expressions](#1-utilizing-ternary-expressions)
+    - [React Example with a Ternary Expression](#react-example-with-a-ternary-expression)
+      - [Code Explanation dissected](#code-explanation-dissected-2)
+    - [Disadvantage of Ternary Expressions](#disadvantage-of-ternary-expressions)
+    - [Inlining Ternary Expressions in JSX](#inlining-ternary-expressions-in-jsx)
+      - [Code Explanation dissected](#code-explanation-dissected-3)
+  - [2. Abusing JavaScript Logical Operators](#2-abusing-javascript-logical-operators)
+    - [The Problem](#the-problem)
+    - [The Solution: Short-Circuiting](#the-solution-short-circuiting)
+  - [3. Get Creative!](#3-get-creative)
+      - [Code Explanation dissected](#code-explanation-dissected-4)
+  - [4. 🤔 Which Approach is Best?](#4--which-approach-is-best)
+  - [5. 🏷️ Setting Element Tags Conditionally](#5-️-setting-element-tags-conditionally)
+      - [Code Explanation dissected](#code-explanation-dissected-5)
+    - [Using Variables for Component Types](#using-variables-for-component-types)
+- [📤 **Outputting List Data**](#-outputting-list-data)
+      - [Code Explanation dissected](#code-explanation-dissected-6)
+      - [Code Explanation dissected](#code-explanation-dissected-7)
+      - [Code Explanation dissected](#code-explanation-dissected-8)
+      - [Code Explanation dissected](#code-explanation-dissected-9)
+  - [🗺️ Mapping List Data](#️-mapping-list-data)
+      - [Code Explanation dissected](#code-explanation-dissected-10)
+      - [Code Explanation dissected](#code-explanation-dissected-11)
+      - [Code Explanation dissected](#code-explanation-dissected-12)
+  - [🔄 Updating Lists](#-updating-lists)
+    - [🚫 Incorrect Approach 1: Mutating State](#-incorrect-approach-1-mutating-state)
+      - [Code Explanation dissected](#code-explanation-dissected-13)
+    - [🚫 Incorrect Approach 2: Using Mutating Methods with `setTodos`](#-incorrect-approach-2-using-mutating-methods-with-settodos)
+    - [✅ Correct Approach: Immutable Updates](#-correct-approach-immutable-updates)
+      - [Code Explanation dissected](#code-explanation-dissected-14)
+  - [🔑 A Problem with List Items: Missing "Keys"](#-a-problem-with-list-items-missing-keys)
+    - [Figure 5.4: Missing Key Warning](#figure-54-missing-key-warning)
+    - [Figure 5.5: Updating a List (Visual Flow)](#figure-55-updating-a-list-visual-flow)
+    - [Figure 5.6: Inefficient DOM Update (Without Keys)](#figure-56-inefficient-dom-update-without-keys)
+  - [🔑 Keys to the Rescue!](#-keys-to-the-rescue)
+      - [Code Explanation dissected](#code-explanation-dissected-15)
+    - [What Makes a Good Key?](#what-makes-a-good-key)
+    - [What if I don't have an ID?](#what-if-i-dont-have-an-id)
+    - [Figure 5.7: Efficient DOM Update (With Keys)](#figure-57-efficient-dom-update-with-keys)
+
+</details>
+
+---
+
 Before exploring the techniques for outputting conditional content or list data, it is essential to first understand exactly what these terms mean.
 
 ---
